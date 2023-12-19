@@ -2,7 +2,7 @@
 FROM nginx:alpine
 
 # Set the working directory inside the container
-WORKDIR /usr/share/nginx/html
+WORKDIR /usr/src/app
 
 # Copy your HTML and CSS files to the working directory
 COPY . .
