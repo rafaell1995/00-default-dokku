@@ -1,14 +1,15 @@
-# Use the official Nginx image as a parent image
-FROM nginx:stable-alpine
+FROM node:18-alpine
 
-# Set the working directory to nginx asset directory
-WORKDIR /usr/share/nginx/html
+WORKDIR /usr/src/app
 
-# Remove the default nginx static assets
-RUN rm -rf ./*
+COPY package*.json ./
 
-# Copy static assets from the current directory to the container
+RUN npm install
+
 COPY . .
 
-# Containers run nginx with global directives and daemon off
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+RUN npm run build
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
